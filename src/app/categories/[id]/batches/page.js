@@ -51,7 +51,7 @@ export default function CategoryBatchesPage() {
       }
 
       const response = await axios.get(
-        `http://localhost:2300/api/categories/${categoryId}/batches?includeStats=true`,
+        `${process.env.NEXT_APP_API_URL}/api/categories/${categoryId}/batches?includeStats=true`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -88,8 +88,8 @@ export default function CategoryBatchesPage() {
       };
 
       const url = editingBatch
-        ? `http://localhost:2300/api/batches/${editingBatch._id}`
-        : "http://localhost:2300/api/batches";
+        ? `${process.env.NEXT_APP_API_URL}/api/batches/${editingBatch._id}`
+        : `${process.env.NEXT_APP_API_URL}/api/batches`;
 
       const method = editingBatch ? "put" : "post";
 
@@ -145,9 +145,12 @@ export default function CategoryBatchesPage() {
 
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:2300/api/batches/${batchId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.delete(
+        `${process.env.NEXT_APP_API_URL}/api/batches/${batchId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
       setSuccess("Batch deleted successfully!");
       fetchCategoryBatches();

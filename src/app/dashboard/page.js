@@ -61,19 +61,19 @@ export default function DashboardPage() {
     try {
       // Fetch candidates
       const candidatesResponse = await axios.get(
-        "http://localhost:2300/api/candidates?limit=5"
+        `${process.env.NEXT_APP_API_URL}/api/candidates?limit=5`
       );
       setCandidates(candidatesResponse.data.candidates);
 
       // Fetch categories with stats
       const categoriesResponse = await axios.get(
-        "http://localhost:2300/api/categories?includeStats=true"
+        `${process.env.NEXT_APP_API_URL}/api/categories?includeStats=true`
       );
       setCategories(categoriesResponse.data.categories);
 
       // Fetch recent batches
       const batchesResponse = await axios.get(
-        "http://localhost:2300/api/batches?limit=5&includeStats=true"
+        `${process.env.NEXT_APP_API_URL}/api/batches?limit=5&includeStats=true`
       );
       setRecentBatches(batchesResponse.data.batches);
 
@@ -136,7 +136,7 @@ export default function DashboardPage() {
   const initiateCall = async (candidateId) => {
     try {
       const response = await axios.post(
-        `http://localhost:2300/api/voice/call/${candidateId}`,
+        `${process.env.NEXT_APP_API_URL}/api/voice/call/${candidateId}`,
         {
           voice: "alloy",
           maxDuration: 600,

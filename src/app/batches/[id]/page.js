@@ -49,7 +49,7 @@ export default function BatchManagementPage() {
       }
 
       const response = await axios.get(
-        `http://localhost:2300/api/batches/${batchId}?includeCandidates=true`,
+        `${process.env.NEXT_APP_API_URL}/api/batches/${batchId}?includeCandidates=true`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -72,9 +72,12 @@ export default function BatchManagementPage() {
   const fetchAvailableCandidates = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get("http://localhost:2300/api/candidates", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await axios.get(
+        `${process.env.NEXT_APP_API_URL}/api/candidates`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
       setAvailableCandidates(response.data.candidates || []);
     } catch (error) {
@@ -91,7 +94,7 @@ export default function BatchManagementPage() {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        `http://localhost:2300/api/batches/${batchId}/candidates`,
+        `${process.env.NEXT_APP_API_URL}/api/batches/${batchId}/candidates`,
         {
           candidateIds: selectedCandidates,
         },
@@ -123,7 +126,7 @@ export default function BatchManagementPage() {
     try {
       const token = localStorage.getItem("token");
       await axios.delete(
-        `http://localhost:2300/api/batches/${batchId}/candidates/${candidateId}`,
+        `${process.env.NEXT_APP_API_URL}/api/batches/${batchId}/candidates/${candidateId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -143,7 +146,7 @@ export default function BatchManagementPage() {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        `http://localhost:2300/api/batches/${batchId}/candidates/${candidateId}/reassess`,
+        `${process.env.NEXT_APP_API_URL}/api/batches/${batchId}/candidates/${candidateId}/reassess`,
         {},
         {
           headers: { Authorization: `Bearer ${token}` },

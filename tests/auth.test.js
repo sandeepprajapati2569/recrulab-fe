@@ -105,7 +105,7 @@ describe("Authentication Components", () => {
       // 5. User is redirected to dashboard
 
       expect(mockAxios.post).toHaveBeenCalledWith(
-        "http://localhost:2300/api/auth/login",
+        "process.env.NEXT_APP_API_URL/api/auth/login",
         loginData
       );
 
@@ -208,7 +208,7 @@ describe("Authentication Components", () => {
       // 3. User is redirected to dashboard
 
       expect(mockAxios.post).toHaveBeenCalledWith(
-        "http://localhost:2300/api/auth/signup",
+        "process.env.NEXT_APP_API_URL/api/auth/signup",
         signupData
       );
     });
@@ -340,7 +340,7 @@ describe("Authentication Components", () => {
       // - Pagination info is shown
 
       expect(mockAxios.get).toHaveBeenCalledWith(
-        "http://localhost:2300/api/candidates?limit=5"
+        "process.env.NEXT_APP_API_URL/api/candidates?limit=5"
       );
     });
 

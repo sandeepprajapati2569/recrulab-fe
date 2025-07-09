@@ -49,7 +49,7 @@ export default function BatchUploadPage() {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `http://localhost:2300/api/batches/${batchId}`,
+        `process.env.NEXT_APP_API_URL/api/batches/${batchId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -107,7 +107,7 @@ export default function BatchUploadPage() {
       formData.append("batchId", batchId);
 
       const response = await axios.post(
-        "http://localhost:2300/api/candidates/upload-to-batch",
+        "process.env.NEXT_APP_API_URL/api/candidates/upload-to-batch",
         formData,
         {
           headers: {

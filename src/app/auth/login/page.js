@@ -28,7 +28,7 @@ export default function LoginPage() {
 
     try {
       const response = await axios.post(
-        "http://localhost:2300/api/auth/login",
+        `${process.env.NEXT_APP_API_URL}/api/auth/login`,
         formData
       );
 

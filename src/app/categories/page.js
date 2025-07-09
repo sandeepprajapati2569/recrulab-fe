@@ -36,7 +36,7 @@ export default function CategoriesPage() {
       }
 
       const response = await axios.get(
-        "http://localhost:2300/api/categories?includeStats=true",
+        `${process.env.NEXT_APP_API_URL}/api/categories?includeStats=true`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -63,8 +63,8 @@ export default function CategoriesPage() {
     try {
       const token = localStorage.getItem("token");
       const url = editingCategory
-        ? `http://localhost:2300/api/categories/${editingCategory._id}`
-        : "http://localhost:2300/api/categories";
+        ? `${process.env.NEXT_APP_API_URL}/api/categories/${editingCategory._id}`
+        : `${process.env.NEXT_APP_API_URL}/api/categories`;
 
       const method = editingCategory ? "put" : "post";
 
@@ -104,9 +104,12 @@ export default function CategoriesPage() {
 
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:2300/api/categories/${categoryId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.delete(
+        `${process.env.NEXT_APP_API_URL}/api/categories/${categoryId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
       setSuccess("Category deleted successfully!");
       fetchCategories();
